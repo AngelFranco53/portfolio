@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
+import { contactInfo } from '../data/contactInfo'
 
 onMounted(() => {
   const observer = new IntersectionObserver(
@@ -112,6 +113,43 @@ const stats = [
   { value: '15+', label: 'Proyectos entregados', icon: '🚀' },
   { value: '10+', label: 'Tecnologías dominadas', icon: '💻' },
   { value: '3', label: 'Certificaciones', icon: '🏆' },
+]
+
+const completedCourses = [
+  { title: 'Escuela de JavaScript', institution: 'Platzi', period: '2025', topic: 'JavaScript moderno' },
+  { title: 'Curso de Vue.js', institution: 'Platzi', period: '2024', topic: 'Frontend con Vue' },
+  { title: 'Curso de Backend con Node.js', institution: 'Platzi', period: '2024', topic: 'APIs y arquitectura backend' },
+]
+
+const taughtCourses = [
+  { title: 'Introducción al Desarrollo Web', institution: 'Taller local', period: '2025', topic: 'HTML, CSS y JavaScript' },
+  { title: 'Buenas prácticas con Git y GitHub', institution: 'Comunidad dev', period: '2024', topic: 'Control de versiones colaborativo' },
+]
+
+const techTalks = [
+  { title: 'Cómo iniciar en desarrollo web', institution: 'Evento universitario', period: '2025', topic: 'Ruta de aprendizaje para juniors' },
+  { title: 'Productividad para desarrolladores', institution: 'Meetup local', period: '2024', topic: 'Flujos de trabajo y herramientas' },
+]
+
+const achievementsGroups = [
+  {
+    title: 'Cursos realizados',
+    icon: '📚',
+    color: '#00d4ff',
+    items: completedCourses,
+  },
+  {
+    title: 'Cursos impartidos',
+    icon: '🎓',
+    color: '#4f7ef7',
+    items: taughtCourses,
+  },
+  {
+    title: 'Charlas y ponencias',
+    icon: '🎤',
+    color: '#7c3aed',
+    items: techTalks,
+  },
 ]
 </script>
 
@@ -303,6 +341,45 @@ const stats = [
         </div>
       </div>
 
+      <!-- Formación y comunidad -->
+      <div class="mb-20">
+        <div class="text-center mb-12 reveal">
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#e8f0ff] mb-3">
+            Formación &amp; <span class="gradient-text">Comunidad</span>
+          </h2>
+          <p class="text-[#8099cc]">Logros que reflejan aprendizaje continuo y aporte al ecosistema tech</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-5">
+          <div
+            v-for="(group, i) in achievementsGroups"
+            :key="group.title"
+            class="glass-card rounded-2xl p-6 reveal-scale"
+            :style="`transition-delay: ${i * 80}ms`"
+          >
+            <div class="flex items-center gap-3 mb-5">
+              <span class="text-2xl">{{ group.icon }}</span>
+              <h3 class="font-bold text-[#e8f0ff] text-lg">{{ group.title }}</h3>
+            </div>
+
+            <div class="space-y-4">
+              <div
+                v-for="item in group.items"
+                :key="`${item.title}-${item.period}`"
+                class="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-4"
+              >
+                <div class="flex items-start justify-between gap-2 mb-1">
+                  <p class="font-semibold text-[#e8f0ff] text-sm">{{ item.title }}</p>
+                  <span class="text-xs font-medium" :style="{ color: group.color }">{{ item.period }}</span>
+                </div>
+                <p class="text-xs text-[#8099cc] mb-1">{{ item.institution }}</p>
+                <p class="text-xs text-[#a9badf]">{{ item.topic }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- CTA -->
       <div class="glass-card rounded-3xl p-10 text-center reveal"
         style="background: linear-gradient(135deg, rgba(79,126,247,0.04), rgba(0,212,255,0.04)); border-color: rgba(79,126,247,0.2);">
@@ -316,8 +393,14 @@ const stats = [
           <RouterLink to="/proyectos" class="btn-primary">
             Ver mis proyectos
           </RouterLink>
-          <a href="mailto:tu@email.com" class="btn-outline">
+          <a :href="`mailto:${contactInfo.email}`" class="btn-outline">
             Enviar mensaje
+          </a>
+          <a :href="contactInfo.linkedin" target="_blank" rel="noopener noreferrer" class="btn-outline">
+            LinkedIn
+          </a>
+          <a :href="contactInfo.github" target="_blank" rel="noopener noreferrer" class="btn-outline">
+            GitHub
           </a>
         </div>
       </div>

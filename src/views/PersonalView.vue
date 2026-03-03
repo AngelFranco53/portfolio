@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
+import { contactInfo } from '../data/contactInfo'
 
 onMounted(() => {
   const observer = new IntersectionObserver(
@@ -34,6 +35,8 @@ const softSkills = [
   { label: 'Liderazgo', level: 82 },
   { label: 'Pensamiento crítico', level: 92 },
   { label: 'Gestión del tiempo', level: 85 },
+  { label: 'Gestión de personal', level: 80 },
+  
 ]
 
 const values = [
@@ -41,6 +44,20 @@ const values = [
   { icon: '🤝', title: 'Colaboración', desc: 'El mejor trabajo nace del equipo y la comunicación' },
   { icon: '🚀', title: 'Ambición', desc: 'Siempre buscando superar expectativas y crecer' },
   { icon: '💡', title: 'Creatividad', desc: 'Soluciones innovadoras para desafíos complejos' },
+]
+
+const contactCards = [
+  { icon: '📍', label: 'Ubicación', value: 'Lázaro Cárdenas, México' },
+  { icon: '📧', label: 'Email', value: contactInfo.email },
+  { icon: '📱', label: 'Celular', value: contactInfo.phone },
+  { icon: '🌐', label: 'Idiomas', value: 'Español, Inglés' },
+]
+
+const socialLinks = [
+  { label: 'Contáctame', href: `mailto:${contactInfo.email}`, style: 'btn-primary py-2.5 px-5 text-sm' },
+  { label: 'LinkedIn', href: contactInfo.linkedin, style: 'btn-outline py-2.5 px-5 text-sm' },
+  { label: 'GitHub', href: contactInfo.github, style: 'btn-outline py-2.5 px-5 text-sm' },
+  { label: 'Platzi', href: contactInfo.platzi, style: 'btn-outline py-2.5 px-5 text-sm' },
 ]
 </script>
 
@@ -121,12 +138,7 @@ const values = [
 
           <!-- Datos de contacto -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-            <div v-for="(item, i) in [
-              { icon: '📍', label: 'Ubicación', value: 'Lázaro Cárdenas, México' },
-              { icon: '📧', label: 'Email', value: 'angelfranko117@gmail.com' },
-              { icon: '🌐', label: 'Idiomas', value: 'Español, Inglés' },
-              { icon: '🎂', label: 'Edad', value: '25 años' },
-            ]" :key="i"
+            <div v-for="(item, i) in contactCards" :key="i"
               class="glass-card rounded-xl p-3 flex items-center gap-3">
               <span class="text-xl">{{ item.icon }}</span>
               <div>
@@ -138,17 +150,9 @@ const values = [
 
           <!-- Social links -->
           <div class="flex gap-3">
-            <a href="mailto:angelfranko117@gmail.com"
-              class="btn-primary py-2.5 px-5 text-sm">
-              Contáctame
-            </a>
-            <a href="https://linkedin.com" target="_blank"
-              class="btn-outline py-2.5 px-5 text-sm">
-              LinkedIn
-            </a>
-            <a href="https://github.com" target="_blank"
-              class="btn-outline py-2.5 px-5 text-sm">
-              GitHub
+            <a v-for="link in socialLinks" :key="link.label" :href="link.href" target="_blank" rel="noopener noreferrer"
+              :class="link.style">
+              {{ link.label }}
             </a>
           </div>
         </div>

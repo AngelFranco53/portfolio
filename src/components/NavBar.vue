@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { contactInfo } from '../data/contactInfo'
 
 const route = useRoute()
 const scrolled = ref(false)
@@ -76,7 +77,7 @@ const isActive = (path) => route.path === path
       <!-- CTA + burger -->
       <div class="flex items-center gap-3">
         <a
-          href="mailto:angelfranko117@gmail.com"
+          :href="`mailto:${contactInfo.email}`"
           class="hidden md:block btn-primary text-sm py-2 px-5"
         >
           Contáctame
@@ -122,7 +123,7 @@ const isActive = (path) => route.path === path
             {{ link.name }}
           </RouterLink>
           <a
-            href="mailto:angelfranko117@gmail.com"
+            :href="`mailto:${contactInfo.email}`"
             class="btn-primary mt-2 justify-center text-sm py-2"
           >
             Contáctame

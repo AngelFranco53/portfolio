@@ -67,10 +67,14 @@ onUnmounted(() => {
 })
 
 const stats = [
-  { value: '2+', label: 'Años de experiencia' },
+  { value: '3+', label: 'Años de experiencia laboral' },
+  { value: '5+', label: 'Años programando' },
   { value: '15+', label: 'Proyectos completados' },
   { value: '10+', label: 'Tecnologías' },
   { value: '100%', label: 'Compromiso' },
+  { value: '30+' , label: 'Cursos completados' },
+  { value: '2', label: 'Conferencias impartidas' },
+  { value: '5+', label: 'Cursos impartidos' },
 ]
 </script>
 
